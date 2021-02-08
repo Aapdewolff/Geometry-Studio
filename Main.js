@@ -1,3 +1,7 @@
-alert("Hi there");
+window.onload = function() {
+    LibBuilder.Build(function() {
+        Canvas.Init();
 
-// A very userfull test comment
+        window.onresize = Canvas.Resize;
+    });
+}
