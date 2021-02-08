@@ -1,5 +1,6 @@
 window.onload = function() {
     LibBuilder.Build(function() {
+        Logger.init(true);
         Canvas.init();
 
         window.onresize = Canvas.resize;
