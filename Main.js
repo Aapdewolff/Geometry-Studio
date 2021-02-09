@@ -1,15 +1,13 @@
 window.onload = function() {
-    LibBuilder.Build(function() {
+    LibBuilder.build(function() {
         Logger.init(true);
+
         Canvas.init();
+        Renderer.init();
 
-        window.onresize = Canvas.resize;
+        var vertShader = new Shader("Assets/fragment.shader");
 
-        var vec3A = new Vector3(3, 10, 30);
-        vec3A.onChange = function() { console.log("Change!"); }
-        console.log(vec3A.magnitude);
-        vec3A.magnitude = 3;
-        console.log(vec3A.magnitude);
-        console.log(vec3A.toString());
+        console.log(Matrix4.identity().toString());
+        console.log(Resources.getShader("Assets/fragment.shader").data.src);
     });
 }
