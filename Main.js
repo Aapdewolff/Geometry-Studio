@@ -8,7 +8,7 @@ window.onload = function() {
         var shaderProgram = new ShaderProgram(vertShader, fragShader);
 
         var material = new Material(shaderProgram, {
-            color: new Vector3(1, 1, 0.5)
+            color: Color.teal,
         });
 
         const vertices = [
