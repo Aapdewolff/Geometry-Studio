@@ -4,8 +4,10 @@ Resources.parseShader({
     data: {
         shaderType: "Fragment",
         src:
+        "uniform mediump vec3 color;" + "\n" +
+        "" + "\n" +
         "void main() {" + "\n" +
-        "   gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);" + "\n" +
+        "   gl_FragColor = vec4(color.r, color.g, color.b, 1.0);" + "\n" +
         "}" + "\n"
     }
 });
