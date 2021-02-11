@@ -5,6 +5,10 @@ html, body {
     overflow:hidden;
 }
 
+img {
+    display: none;
+}
+
 canvas {
     background-color:black;
 }
