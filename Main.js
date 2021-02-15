@@ -7,18 +7,12 @@ window.onload = function() {
 
         var shaderProgram = new ShaderProgram(vertShader, fragShader);
 
-        var texture = new Texture("resources/crate.png", TextureFormat.RGB, TextureFiltering.LINEAR);
+        var texture = new Texture("resources/crate.png", TextureFormat.RGBA, TextureFiltering.LINEAR);
         var material = new Material(shaderProgram, {
             color: Color.white,
             mainTex: texture
         });
 
-        /*const vertices = [
-            new Vector3(-1.0, 1.0, 0.0),
-            new Vector3(1.0, 1.0, 0.0),
-            new Vector3(-1.0, -1.0, 0.0),
-            new Vector3(1.0, -1.0, 0.0)
-        ];*/
         const vertices = [
             new Vector3(-1.0, -1.0,  1.0),
             new Vector3( 1.0, -1.0,  1.0),
@@ -88,15 +82,14 @@ window.onload = function() {
         ];
         var mesh = new Mesh(vertices, indices, uvs);
 
-        var actor = new Actor(new Vector3(0, 0, -5), new Vector3(0, 0, 0), Vector3.one.multiplyByNumber(1));
-        var meshRenderer = actor.addComponent(MeshRenderer);
-        meshRenderer.mesh = mesh;
-        meshRenderer.material = material;
-
-        var actor2 = new Actor(new Vector3(3, 0, -5), new Vector3(0, 0, 0), Vector3.one);
-        var meshRenderer2 = actor2.addComponent(MeshRenderer);
-        meshRenderer2.mesh = mesh;
-        meshRenderer2.material = material;        
+        for(var x = -12; x <= 12; x += 2) {
+            for(var y = -6; y <= 6; y += 2) {
+                var actor = new Actor(new Vector3(x, y, -10), new Vector3(0, 0, 0), Vector3.one.multiplyByNumber(0.5));
+                var meshRenderer = actor.addComponent(MeshRenderer);
+                meshRenderer.mesh = mesh;
+                meshRenderer.material = material;
+            }
+        }      
 
         GameLoop.init();
     });
