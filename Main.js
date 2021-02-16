@@ -2,16 +2,20 @@ window.onload = function() {
     LibBuilder.build(function() {
         Application.init(true);
 
+        Scene.ambientColor = new Color(.2, .2, .2);
+
         var vertShader = new Shader("Assets/vertex.shader");
         var fragShader = new Shader("Assets/fragment.shader");
 
         var shaderProgram = new ShaderProgram(vertShader, fragShader);
 
         var texture = new Texture("resources/crate.png", TextureFormat.RGBA, TextureFiltering.LINEAR);
-        var material = new Material(shaderProgram, {
+        
+        /*var material = new Material(shaderProgram, {
+            shininess: 1,
             color: Color.white,
-            mainTex: texture
-        });
+            diffuse: texture
+        });*/
 
         const vertices = [
             new Vector3(-1.0, -1.0,  1.0),
@@ -80,16 +84,80 @@ window.onload = function() {
             new Vector2(1.0,  1.0),
             new Vector2(0.0,  1.0)
         ];
-        var mesh = new Mesh(vertices, indices, uvs);
 
+        const normals = [
+            new Vector3(0.0,  0.0,  1.0),
+            new Vector3(0.0,  0.0,  1.0),
+            new Vector3(0.0,  0.0,  1.0),
+            new Vector3(0.0,  0.0,  1.0),
+    
+            new Vector3(0.0,  0.0, -1.0),
+            new Vector3(0.0,  0.0, -1.0),
+            new Vector3(0.0,  0.0, -1.0),
+            new Vector3(0.0,  0.0, -1.0),
+    
+            new Vector3(0.0,  1.0,  0.0),
+            new Vector3(0.0,  1.0,  0.0),
+            new Vector3(0.0,  1.0,  0.0),
+            new Vector3(0.0,  1.0,  0.0),
+    
+            new Vector3(0.0, -1.0,  0.0),
+            new Vector3(0.0, -1.0,  0.0),
+            new Vector3(0.0, -1.0,  0.0),
+            new Vector3(0.0, -1.0,  0.0),
+            
+            new Vector3(1.0,  0.0,  0.0),
+            new Vector3(1.0,  0.0,  0.0),
+            new Vector3(1.0,  0.0,  0.0),
+            new Vector3(1.0,  0.0,  0.0),
+        
+            new Vector3(-1.0,  0.0,  0.0),
+            new Vector3(-1.0,  0.0,  0.0),
+            new Vector3(-1.0,  0.0,  0.0),
+            new Vector3(-1.0,  0.0,  0.0)
+        ];
+        var mesh = new Mesh(vertices, indices, uvs, normals);
+        
+        /*var cube = new Actor(new Vector3(0, 0, -10), new Vector3(0, 0, 0));
+        var meshRenderer = cube.addComponent(MeshRenderer);
+        meshRenderer.mesh = mesh;
+        meshRenderer.material = material;
+
+        var sun = new Actor(new Vector3(3, 0, -6), new Vector3(-1, -1, -1));
+        var light = sun.addComponent(Light);
+        light.color = Color.white;
+        light.type = LightType.POINT;
+
+        GameLoop.init();
+
+        Canvas.clear();
+        for(var i = 0; i < Scene.actors.length; i++) {
+            const meshRenderer = Scene.actors[i].getComponent(MeshRenderer);
+            if(meshRenderer != null) {
+                Renderer.submit(meshRenderer);
+            }
+        }
+        Renderer.flush();*/
+        
         for(var x = -12; x <= 12; x += 2) {
             for(var y = -6; y <= 6; y += 2) {
+                var material = new Material(shaderProgram, {
+                    shininess: 1,
+                    color: Color.random,
+                    diffuse: texture
+                });
+
                 var actor = new Actor(new Vector3(x, y, -10), new Vector3(0, 0, 0), Vector3.one.multiplyByNumber(0.5));
                 var meshRenderer = actor.addComponent(MeshRenderer);
                 meshRenderer.mesh = mesh;
                 meshRenderer.material = material;
             }
-        }      
+        }
+
+        var sun = new Actor(new Vector3(0, 0, -10), new Vector3(-1, -1, -1));
+        var light = sun.addComponent(Light);
+        light.color = new Color(1, 1, .9);
+        light.type = LightType.DIRECTIONAL;
 
         GameLoop.init();
     });
