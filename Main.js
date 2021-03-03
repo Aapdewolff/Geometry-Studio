@@ -1,7 +1,5 @@
 window.onload = function() {
-    LibBuilder.build(function() {
-        Ammo().then(Start);
-    });
+    Start();
 }
 
 function Start() {
@@ -9,8 +7,8 @@ function Start() {
 
     Scene.ambientColor = new Color(.2, .2, .2);
 
-    var vertShader = new Shader("Assets/vertex.shader");
-    var fragShader = new Shader("Assets/fragment.shader");
+    var vertShader = new Shader("default_vertex");
+    var fragShader = new Shader("default_fragment");
 
     var shaderProgram = new ShaderProgram(vertShader, fragShader);
 
