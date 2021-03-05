@@ -148,13 +148,20 @@ function Start() {
             var meshRenderer = actor.addComponent(MeshRenderer);
             meshRenderer.mesh = mesh;
             meshRenderer.material = material;
+
+            actor.addComponent(CubeRotator);
         }
     }
 
-    var sun = new Actor(new Vector3(0, 0, -10), new Vector3(-1, -1, -1));
-    var light = sun.addComponent(Light);
+    var sun = new Actor(new Vector3(0, 0, -10), new Vector3(-50, 30, 0));
+    sun.addComponent(Light);
+    var light = sun.getComponent(Light);
     light.color = new Color(1, 1, .9);
     light.type = LightType.DIRECTIONAL;
+
+    var camera = new Actor(new Vector3(0, 0, -30), new Vector3(0, 180, 0));
+    var cam = camera.addComponent(Camera);
+    camera.addComponent(CameraMovement);
 
     GameLoop.init();
 }
