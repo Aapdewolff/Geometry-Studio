@@ -2,8 +2,8 @@ window.onload = function() {
     Start();
 }
 
-function Start() {
-    Application.init(true);
+async function Start() {
+    await Application.init(true);
 
     Scene.ambientColor = new Color(.2, .2, .2);
 
@@ -114,27 +114,6 @@ function Start() {
         new Vector3(-1.0,  0.0,  0.0)
     ];
     var mesh = new Mesh(vertices, indices, uvs, normals);
-    
-    /*var cube = new Actor(new Vector3(0, 0, -10), new Vector3(0, 0, 0));
-    var meshRenderer = cube.addComponent(MeshRenderer);
-    meshRenderer.mesh = mesh;
-    meshRenderer.material = material;
-
-    var sun = new Actor(new Vector3(3, 0, -6), new Vector3(-1, -1, -1));
-    var light = sun.addComponent(Light);
-    light.color = Color.white;
-    light.type = LightType.POINT;
-
-    GameLoop.init();
-
-    Canvas.clear();
-    for(var i = 0; i < Scene.actors.length; i++) {
-        const meshRenderer = Scene.actors[i].getComponent(MeshRenderer);
-        if(meshRenderer != null) {
-            Renderer.submit(meshRenderer);
-        }
-    }
-    Renderer.flush();*/
     
     for(var x = -12; x <= 12; x += 2) {
         for(var y = -6; y <= 6; y += 2) {
