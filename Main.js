@@ -14,106 +14,7 @@ async function Start() {
 
     var texture = new Texture("resources/crate.png", TextureFormat.RGBA, TextureFiltering.LINEAR);
 
-    const vertices = [
-        new Vector3(-1.0, -1.0,  1.0),
-        new Vector3( 1.0, -1.0,  1.0),
-        new Vector3( 1.0,  1.0,  1.0),
-        new Vector3(-1.0,  1.0,  1.0),
-
-        new Vector3(-1.0, -1.0, -1.0),
-        new Vector3(-1.0,  1.0, -1.0),
-        new Vector3( 1.0,  1.0, -1.0),
-        new Vector3( 1.0, -1.0, -1.0),
-
-        new Vector3(-1.0,  1.0, -1.0),
-        new Vector3(-1.0,  1.0,  1.0),
-        new Vector3( 1.0,  1.0,  1.0),
-        new Vector3( 1.0,  1.0, -1.0),
-
-        new Vector3(-1.0, -1.0, -1.0),
-        new Vector3( 1.0, -1.0, -1.0),
-        new Vector3( 1.0, -1.0,  1.0),
-        new Vector3(-1.0, -1.0,  1.0),
-
-        new Vector3( 1.0, -1.0, -1.0),
-        new Vector3( 1.0,  1.0, -1.0),
-        new Vector3( 1.0,  1.0,  1.0),
-        new Vector3( 1.0, -1.0,  1.0),
-
-        new Vector3(-1.0, -1.0, -1.0),
-        new Vector3(-1.0, -1.0,  1.0),
-        new Vector3(-1.0,  1.0,  1.0),
-        new Vector3(-1.0,  1.0, -1.0)
-    ];
-
-    const indices = [
-        0,  1,  2,      0,  2,  3,
-        4,  5,  6,      4,  6,  7,
-        8,  9,  10,     8,  10, 11,
-        12, 13, 14,     12, 14, 15,
-        16, 17, 18,     16, 18, 19,
-        20, 21, 22,     20, 22, 23,
-    ];
-
-    const uvs = [
-        new Vector2(0.0,  0.0),
-        new Vector2(1.0,  0.0),
-        new Vector2(1.0,  1.0),
-        new Vector2(0.0,  1.0),
-        new Vector2(0.0,  0.0),
-        new Vector2(1.0,  0.0),
-        new Vector2(1.0,  1.0),
-        new Vector2(0.0,  1.0),
-        new Vector2(0.0,  0.0),
-        new Vector2(1.0,  0.0),
-        new Vector2(1.0,  1.0),
-        new Vector2(0.0,  1.0),
-        new Vector2(0.0,  0.0),
-        new Vector2(1.0,  0.0),
-        new Vector2(1.0,  1.0),
-        new Vector2(0.0,  1.0),
-        new Vector2(0.0,  0.0),
-        new Vector2(1.0,  0.0),
-        new Vector2(1.0,  1.0),
-        new Vector2(0.0,  1.0),
-        new Vector2(0.0,  0.0),
-        new Vector2(1.0,  0.0),
-        new Vector2(1.0,  1.0),
-        new Vector2(0.0,  1.0)
-    ];
-
-    const normals = [
-        new Vector3(0.0,  0.0,  1.0),
-        new Vector3(0.0,  0.0,  1.0),
-        new Vector3(0.0,  0.0,  1.0),
-        new Vector3(0.0,  0.0,  1.0),
-
-        new Vector3(0.0,  0.0, -1.0),
-        new Vector3(0.0,  0.0, -1.0),
-        new Vector3(0.0,  0.0, -1.0),
-        new Vector3(0.0,  0.0, -1.0),
-
-        new Vector3(0.0,  1.0,  0.0),
-        new Vector3(0.0,  1.0,  0.0),
-        new Vector3(0.0,  1.0,  0.0),
-        new Vector3(0.0,  1.0,  0.0),
-
-        new Vector3(0.0, -1.0,  0.0),
-        new Vector3(0.0, -1.0,  0.0),
-        new Vector3(0.0, -1.0,  0.0),
-        new Vector3(0.0, -1.0,  0.0),
-        
-        new Vector3(1.0,  0.0,  0.0),
-        new Vector3(1.0,  0.0,  0.0),
-        new Vector3(1.0,  0.0,  0.0),
-        new Vector3(1.0,  0.0,  0.0),
-    
-        new Vector3(-1.0,  0.0,  0.0),
-        new Vector3(-1.0,  0.0,  0.0),
-        new Vector3(-1.0,  0.0,  0.0),
-        new Vector3(-1.0,  0.0,  0.0)
-    ];
-    var mesh = new Mesh(vertices, indices, uvs, normals);
+    var mesh = Primitives.Cube(new Vector3(1, 1, 0), Vector3.zero, new Vector3(1, 0.5, 1));
     
     for(var x = -12; x <= 12; x += 2) {
         for(var y = -6; y <= 6; y += 2) {
@@ -139,7 +40,7 @@ async function Start() {
     light.type = LightType.DIRECTIONAL;
 
     var camera = new Actor(new Vector3(0, 0, -30), new Vector3(0, 180, 0));
-    var cam = camera.addComponent(Camera);
+    camera.addComponent(Camera);
     camera.addComponent(CameraMovement);
 
     GameLoop.init();
